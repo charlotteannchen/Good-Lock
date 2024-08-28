@@ -4,8 +4,8 @@
 > 👉 Download the code  
 
 ```bash
-$ git clone https://github.com/creativetimofficial/soft-ui-dashboard-django.git
-$ cd soft-ui-dashboard-django
+$ git clone https://github.com/charlotteannchen/Good-Lock.git
+$ cd Good-Lock
 ```
 
 <br />
