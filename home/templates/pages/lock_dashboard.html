@@ -220,9 +220,20 @@
                     if (data.error) {
                         alert('Error: ' + data.error);
                     } else {
-                        // Display the GPS data in an alert or on the page
-                        alert('Latitude: ' + data.latitude +
-                              '\nLongitude: ' + data.longitude +
+                        // Use the received GPS data to update the Google Map
+                        const latitude = data.latitude;
+                        const longitude = data.longitude;
+                        const api_key = document.getElementById('API_KEY').value; // Get API key from input
+                        const zoom = document.getElementById('zoom').value || 14; // Default zoom level
+
+                        const googleMapsUrl = `https://www.google.com/maps/embed/v1/view?key=${api_key}&center=${latitude},${longitude}&zoom=${zoom}`;
+
+                        // Update the iframe src attribute to show the new location
+                        document.getElementById('googleMapIframe').src = googleMapsUrl;
+
+                        // Optionally, display GPS data in an alert or on the page
+                        alert('Latitude: ' + latitude +
+                              '\nLongitude: ' + longitude +
                               '\nAltitude: ' + data.altitude +
                               '\nSpeed: ' + data.speed + ' km/h' +
                               '\nSatellites: ' + data.satellites);
