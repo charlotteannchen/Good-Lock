@@ -211,6 +211,27 @@
         }
     });
 
+    document.getElementById('toggleConnect').addEventListener('change', function () {
+        if (this.checked) {
+            // Send a request to the ESP32 to get GPS data
+            fetch('/get-gps-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                    } else {
+                        // Display the GPS data in an alert or on the page
+                        alert('Latitude: ' + data.latitude +
+                              '\nLongitude: ' + data.longitude +
+                              '\nAltitude: ' + data.altitude +
+                              '\nSpeed: ' + data.speed + ' km/h' +
+                              '\nSatellites: ' + data.satellites);
+                    }
+                })
+                .catch(error => console.error('Error fetching GPS data:', error));
+        }
+    });
+
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
