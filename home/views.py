@@ -19,7 +19,7 @@ def lock_dashboard(request):
 def send_message_to_esp32(request):
     if request.method == 'POST':
         message = request.POST.get('message', '')
-        esp32_ip = 'http://10.0.175.67/receive-message'  # Replace with the actual IP address and endpoint
+        esp32_ip = 'http://172.20.10.6/receive-message'  # Replace with the actual IP address and endpoint
 
         try:
             # Send the message to the ESP32

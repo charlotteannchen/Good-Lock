@@ -7,61 +7,58 @@
       <div class="row mt-4" style="height: 100%;">
         <div class="col-lg-12 mb-lg-0 mb-12" style="height: 100%;">
           <div class="card" style="height: 100%;"> 
-            {% comment %} key component that could influence the height of the card {% endcomment %}
             <div class="card-body p-3 d-flex flex-column align-items-center">
               <h5 class="mb-1" style="position: absolute; top: 80px; text-align: center; width: 100%;">Add a new Device!</h5>
               <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%; width: 100%;">
                 <div class="mb-3">
-                    <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); width: 400px;" placeholder="Enter device ID" 
-                           pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed" required>
+                    <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); width: 400px;" placeholder="Enter device ID" pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed" required>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-warning d-flex justify-content-center align-items-center p-0"
-                            style="position: absolute; top: 350px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;" 
-                    >
+                    <button type="button" class="btn btn-warning d-flex justify-content-center align-items-center p-0" style="position: absolute; top: 350px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;">
                         <img src="{% static 'img/plus.png' %}" alt="Lock" style="width: 25px; height: 25px;">
                     </button>
                 </div>
-            </div>
-            </div>
               </div>
- 
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Modal -->
+      <!-- Success Modal -->
       <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Notification</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Successfully Added A New Lock!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="FailModal" tabindex="-1" aria-labelledby="FailModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
           <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="FailModalLabel">Notification</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  Incorrect Device ID.
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-              </div>
+            <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Notification</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Successfully Added A New Lock!
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
+
+      <!-- Fail Modal -->
+      <div class="modal fade" id="FailModal" tabindex="-1" aria-labelledby="FailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="FailModalLabel">Notification</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Incorrect Device ID.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
       {% include "includes/footer.html" %}
 
     </div>
@@ -89,31 +86,27 @@
 
         document.querySelector('.btn-warning').addEventListener('click', function() {
           var deviceID = document.getElementById('deviceID').value;
-
-          // 检查 deviceID 是否符合特定条件
-          if (deviceID === 'ejfiw34') {
-              // 显示成功模态框
+      
+          // Send device ID to ESP32
+          fetch('http://172.20.10.6/receive_device_id', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ 'id': deviceID })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
               var successModal = new bootstrap.Modal(document.getElementById('successModal'));
               successModal.show();
-
-              // 发送 deviceID 到 ESP32
-              fetch('http://10.0.175.67/receive_device_id', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ id: deviceID })
-              })
-              .then(response => response.json())
-              .then(data => console.log(data))  // 处理ESP32的响应
-              .catch(error => console.error('Error:', error));
-
-          } else {
-              // 显示失败模态框
-              var FailModal = new bootstrap.Modal(document.getElementById('FailModal'));
-              FailModal.show();
-          }
-      });
+            } else {
+              var failModal = new bootstrap.Modal(document.getElementById('FailModal'));
+              failModal.show();
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        });
       
     </script>
   <script>
