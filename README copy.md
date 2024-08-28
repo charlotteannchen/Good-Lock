@@ -1,4 +1,4 @@
-
+# Good Lock!
 ## Quick start
 
 > 👉 Download the code  
@@ -44,5 +44,3 @@ $ python manage.py runserver
 ```
 
 At this point, the app runs at `http://127.0.0.1:8000/`. 
-
-<br />
