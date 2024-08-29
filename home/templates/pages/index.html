@@ -97,7 +97,7 @@
           var deviceID = document.getElementById('deviceID').value;
         
           // Send device ID to ESP32
-          fetch('http://172.20.10.14/receive_device_id', {
+          fetch('https://172.20.10.14/receive_device_id', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
