@@ -191,6 +191,70 @@
         document.getElementById('googleMapIframe').src = googleMapsUrl;
     };
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    // Add click event listener to "Navigate to your bike" button
+    document.getElementById('navigateButton').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default anchor behavior
+
+        // Get the current latitude and longitude values
+        const latitude = document.getElementById('latitude').value;
+        const longitude = document.getElementById('longitude').value;
+
+        if (latitude && longitude) {
+            // Construct the Google Maps URL for navigation
+            const googleMapsNavigationUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            // Update the button's href attribute to the new URL
+            this.href = googleMapsNavigationUrl;
+            // Optionally, open the URL in a new tab
+            window.open(googleMapsNavigationUrl, '_blank');
+        } else {
+            alert('Please enter both latitude and longitude to navigate.');
+        }
+    });
+
+    document.getElementById('toggleConnect').addEventListener('change', function () {
+        if (this.checked) {
+            // Send a request to the ESP32 to get GPS data
+            fetch('/get-gps-data')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                    } else {
+                        // Use the received GPS data to update the Google Map
+                        const latitude = data.latitude;
+                        const longitude = data.longitude;
+                        const api_key = document.getElementById('API_KEY').value; // Get API key from input
+                        const zoom = document.getElementById('zoom').value || 14; // Default zoom level
+
+                        const googleMapsUrl = `https://www.google.com/maps/embed/v1/view?key=${api_key}&center=${latitude},${longitude}&zoom=${zoom}`;
+
+                        // Update the iframe src attribute to show the new location
+                        document.getElementById('googleMapIframe').src = googleMapsUrl;
+
+                        // Optionally, display GPS data in an alert or on the page
+                        alert('Latitude: ' + latitude +
+                              '\nLongitude: ' + longitude +
+                              '\nAltitude: ' + data.altitude +
+                              '\nSpeed: ' + data.speed + ' km/h' +
+                              '\nSatellites: ' + data.satellites);
+                    }
+                })
+                .catch(error => console.error('Error fetching GPS data:', error));
+        }
+    });
+
+=======
+>>>>>>> parent of 18b446e (Use Latitude and Longitude to generate Google Maps URL.)
+=======
+>>>>>>> parent of 18b446e (Use Latitude and Longitude to generate Google Maps URL.)
+=======
+>>>>>>> parent of 18b446e (Use Latitude and Longitude to generate Google Maps URL.)
+>>>>>>> parent of ca6ec08 (Revert "Use Latitude and Longitude to generate Google Maps URL.")
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
