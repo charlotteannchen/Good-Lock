@@ -103,7 +103,7 @@
         </a>
       </li>
 
-    {% if request.user.is_authenticated and not request.user.is_superuser %}
+    {% comment %} {% if request.user.is_authenticated and not request.user.is_superuser %}
 
       <li class="nav-item">
           <a class="nav-link {% if 'tables' in segment %} active {% endif %} " href="{% url 'tables' %}">
@@ -255,7 +255,7 @@
         </li>
         {% endif %}
 
-    </ul>
+    </ul> {% endcomment %}
 
   </div>
   <div class="sidenav-footer mx-3 ">

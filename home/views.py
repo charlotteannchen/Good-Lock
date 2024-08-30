@@ -31,3 +31,9 @@ def send_message_to_esp32(request):
         except requests.exceptions.RequestException as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+def custom_admin_index(request):
+    return render(request, 'home/templates/admin/index.html')
+
+def custom_admin_lock_dashboard(request):
+    return render(request, 'home/templates/admin/lock_dashboard.html')
