@@ -121,7 +121,7 @@
                                 <button class="btn btn-secondary" type="submit">Update Map</button>
                             </form>
 
-                            <a id="navigateButton" class="btn btn-secondary mt-auto" href="javascript:;">
+                            <a class="btn btn-secondary mt-auto" href="javascript:;">
                                 Navigate to your bike
                                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                             </a>
@@ -191,6 +191,7 @@
         document.getElementById('googleMapIframe').src = googleMapsUrl;
     };
 
+<<<<<<< HEAD
     // Add click event listener to "Navigate to your bike" button
     document.getElementById('navigateButton').addEventListener('click', function (e) {
         e.preventDefault(); // Prevent default anchor behavior
@@ -243,6 +244,8 @@
         }
     });
 
+=======
+>>>>>>> parent of 18b446e (Use Latitude and Longitude to generate Google Maps URL.)
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
