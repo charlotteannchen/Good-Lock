@@ -121,7 +121,7 @@
                                 <button class="btn btn-secondary" type="submit">Update Map</button>
                             </form>
 
-                            <a id="navigateButton" class="btn btn-secondary mt-auto" href="javascript:;">
+                            <a class="btn btn-secondary mt-auto" href="javascript:;">
                                 Navigate to your bike
                                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                             </a>
@@ -190,26 +190,6 @@
         // Update the iframe src attribute
         document.getElementById('googleMapIframe').src = googleMapsUrl;
     };
-
-    // Add click event listener to "Navigate to your bike" button
-    document.getElementById('navigateButton').addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent default anchor behavior
-
-        // Get the current latitude and longitude values
-        const latitude = document.getElementById('latitude').value;
-        const longitude = document.getElementById('longitude').value;
-
-        if (latitude && longitude) {
-            // Construct the Google Maps URL for navigation
-            const googleMapsNavigationUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
-            // Update the button's href attribute to the new URL
-            this.href = googleMapsNavigationUrl;
-            // Optionally, open the URL in a new tab
-            window.open(googleMapsNavigationUrl, '_blank');
-        } else {
-            alert('Please enter both latitude and longitude to navigate.');
-        }
-    });
 
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
