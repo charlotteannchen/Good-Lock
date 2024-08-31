@@ -21,6 +21,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path("admin/", admin.site.urls),
     path("", include('admin_soft.urls')), 
-    path('admin/index/', views.custom_admin_index, name='admin:index'),
-    path('admin/lock_dashboard/', views.custom_admin_lock_dashboard, name='admin:lock_dashboard'),
+    path('admin/index/', views.custom_admin_index, name='admin_index'),
+    path('admin/lock_dashboard/', views.custom_admin_lock_dashboard, name='admin_lock_dashboard'),
 ]

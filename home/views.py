@@ -37,3 +37,16 @@ def custom_admin_index(request):
 
 def custom_admin_lock_dashboard(request):
     return render(request, 'home/templates/admin/lock_dashboard.html')
+
+def get_gps_data(request):
+    esp32_ip = 'http://172.20.10.14/get-gps-data'  # Replace with the actual IP address and endpoint of your ESP32
+
+    try:
+        # Send a GET request to the ESP32 to fetch GPS data
+        response = requests.get(esp32_ip)
+        if response.status_code == 200:
+            return JsonResponse(response.json())  # Assuming the ESP32 returns a JSON response
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Failed to fetch GPS data from ESP32.'})
+    except requests.exceptions.RequestException as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
