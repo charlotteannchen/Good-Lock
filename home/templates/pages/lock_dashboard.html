@@ -43,38 +43,15 @@
                         <div class="col-4 text-end"
                             style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
                             <div class="form-check form-switch" style="transform: scale(1.5);">
-                                <input class="form-check-input" type="checkbox" id="toggleConnect"
+                                <input class="form-check-input" type="checkbox" id="toggleLock"
                                     style="width: 40px; height: 20px;">
-                                <label class="form-check-label" for="toggleConnect"></label>
+                                <label class="form-check-label" for="toggleLock"></label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% comment %} <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
-            <div class="card" style="height: 100%; position: relative;">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bolder"
-                                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
-                                    GPS</p>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end"
-                            style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
-                            <div class="form-check form-switch" style="transform: scale(1.5);">
-                                <input class="form-check-input" type="checkbox" id="toggleConnect"
-                                    style="width: 40px; height: 20px;">
-                                <label class="form-check-label" for="toggleConnect"></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> {% endcomment %}
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
             <div class="card" style="height: 100%; position: relative;">
                 <div class="card-body p-3">
@@ -179,6 +156,34 @@
 
 <script src="{% static 'js/plugins/chartjs.min.js' %}"></script>
 <script>
+    function fetchAddress(latitude, longitude, apiKey) {
+        const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+        
+        fetch(geocodingUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'OK' && data.results.length > 0) {
+                    const address = data.results[0].formatted_address;
+                    const locationName = data.results[0].address_components[0].long_name;
+                    
+                    // Update the address and location name on the page
+                    document.querySelector('h5.font-weight-bolder').innerText = locationName;
+                    document.querySelector('p.mb-5').innerText = address;
+
+                    if (locationElement && addressElement) {
+                        locationElement.innerText = locationName;
+                        addressElement.innerText = address;
+                        
+                    } else {
+                        alert('Location or address elements not found in the DOM.');
+                    }
+                } else {
+                    console.error('No results found for the given coordinates.');
+                }
+            })
+            .catch(error => console.error('Error fetching address data:', error));
+    }
+
     document.getElementById('messageForm').onsubmit = function (e) {
         e.preventDefault(); // Prevent the default form submission
         let formData = new FormData(this);
@@ -208,11 +213,11 @@
         const latitude = document.getElementById('latitude').value;
         const longitude = document.getElementById('longitude').value;
 
-        // Construct the Google Maps embed URL
-        
         const googleMapsUrl = `https://www.google.com/maps/embed/v1/view?key=${api_key}&center=${latitude},${longitude}&zoom=${zoom}`;
         // Update the iframe src attribute
         document.getElementById('googleMapIframe').src = googleMapsUrl;
+
+        fetchAddress(latitude, longitude, api_key); // Fetch and update the address
     };
 
     // Add click event listener to "Navigate to your bike" button
@@ -228,8 +233,13 @@
             const googleMapsNavigationUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
             // Update the button's href attribute to the new URL
             this.href = googleMapsNavigationUrl;
+
             // Optionally, open the URL in a new tab
             window.open(googleMapsNavigationUrl, '_blank');
+
+            // Fetch and update the address
+            fetchAddress(latitude, longitude, api_key); 
+            
         } else {
             alert('Please enter both latitude and longitude to navigate.');
         }
@@ -258,6 +268,8 @@
                         // Update the iframe src attribute to show the new location
                         document.getElementById('googleMapIframe').src = googleMapsUrl;
 
+                        fetchAddress(latitude, longitude, api_key); // Fetch and update the address
+
                         // Optionally, display GPS data in an alert or on the page
                         alert('Latitude: ' + latitude +
                               '\nLongitude: ' + longitude +
@@ -274,7 +286,7 @@
     }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
+    {% comment %} document.addEventListener('DOMContentLoaded', function () {
         const toggleGPS = document.getElementById('toggleGPS');
         if (toggleGPS) {
             toggleGPS.addEventListener('change', function () {
@@ -287,7 +299,7 @@
         } else {
             console.error('toggleGPS element not found.');
         }
-    });
+    }); {% endcomment %}
     
 
     var ctx = document.getElementById("chart-bars").getContext("2d");
