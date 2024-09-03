@@ -77,24 +77,3 @@ def set_locked(request):
             return JsonResponse({'status': 'error', 'message': str(e)})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
-
-@csrf_exempt  # Exempt from CSRF verification for simplicity; consider adding proper security in production
-def receive_gps_data(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            # Extract GPS data
-            latitude = data.get('latitude', None)
-            longitude = data.get('longitude', None)
-            altitude = data.get('altitude', None)
-            speed = data.get('speed', None)
-            satellites = data.get('satellites', None)
-            
-            # Perform any processing or storage of GPS data here
-
-            return JsonResponse({'status': 'success', 'message': 'GPS data received successfully.'})
-        except json.JSONDecodeError:
-            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data.'})
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
-
