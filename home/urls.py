@@ -8,4 +8,5 @@ urlpatterns = [
     path('send_message_to_esp32/', views.send_message_to_esp32, name='send_message_to_esp32'),
     path('get_gps_data/', views.get_gps_data, name='get_gps_data'),
     path('set_locked/', views.set_locked, name='set_locked'),
+    path('api/gps-data/', views.receive_gps_data, name='receive_gps_data'), ## 0904 add https
 ]

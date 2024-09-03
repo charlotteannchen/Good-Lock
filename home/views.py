@@ -77,3 +77,34 @@ def set_locked(request):
             return JsonResponse({'status': 'error', 'message': str(e)})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+## 0904 add https
+@csrf_exempt  # Use this decorator to allow POST requests without a CSRF token for this view
+def receive_gps_data(request):
+    if request.method == 'POST':
+        try:
+            # Parse JSON data from the request body
+            data = json.loads(request.body)
+            device_id = data.get('deviceID')
+            latitude = data.get('latitude')
+            longitude = data.get('longitude')
+            altitude = data.get('altitude')
+            speed = data.get('speed')
+            satellites = data.get('satellites')
+            
+            # Your logic to verify the device ID and handle the GPS data
+            valid_device_ids = ["goodlock2u", "goodlock4u"]
+            if device_id in valid_device_ids:
+                # Device ID is valid
+                return JsonResponse({'status': 'success', 'message': 'Device ID is valid'})
+            else:
+                # Device ID is invalid
+                return JsonResponse({'status': 'failure', 'message': 'Invalid Device ID'})
+                
+        except json.JSONDecodeError:
+            # Handle JSON parsing error
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data'})
+    else:
+        # Handle invalid HTTP method
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+## 0904 add https
