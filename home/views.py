@@ -1,15 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
 import requests
 from django.conf import settings
 from django.http import JsonResponse
 import urllib.parse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
 
 def index(request):
-
-    # Page from the theme 
     return render(request, 'pages/index.html')
 
 
@@ -50,3 +50,51 @@ def get_gps_data(request):
             return JsonResponse({'status': 'error', 'message': 'Failed to fetch GPS data from ESP32.'})
     except requests.exceptions.RequestException as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
+    
+
+@csrf_exempt  # This decorator exempts this view from CSRF verification.
+def set_locked(request):
+    if request.method == 'POST':
+        try:
+            # Parse the incoming JSON data
+            data = json.loads(request.body)
+            locked_state = data.get('locked', False)  # Default to False if not provided
+
+            # Prepare the ESP32 endpoint URL
+            esp32_ip = 'http://172.20.10.14/set-lock-state'  # Replace with your actual ESP32 endpoint
+
+            # Send a request to ESP32 with the lock state
+            response = requests.post(esp32_ip, json={'locked': locked_state})
+            
+            if response.status_code == 200:
+                return JsonResponse({'status': 'success', 'message': 'Lock state updated successfully.'})
+            else:
+                return JsonResponse({'status': 'error', 'message': 'Failed to update lock state on ESP32.'})
+
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data.'})
+        except requests.exceptions.RequestException as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+@csrf_exempt  # Exempt from CSRF verification for simplicity; consider adding proper security in production
+def receive_gps_data(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            # Extract GPS data
+            latitude = data.get('latitude', None)
+            longitude = data.get('longitude', None)
+            altitude = data.get('altitude', None)
+            speed = data.get('speed', None)
+            satellites = data.get('satellites', None)
+            
+            # Perform any processing or storage of GPS data here
+
+            return JsonResponse({'status': 'success', 'message': 'GPS data received successfully.'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data.'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+

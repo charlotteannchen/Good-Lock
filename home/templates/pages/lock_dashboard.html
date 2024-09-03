@@ -162,6 +162,7 @@
         fetch(geocodingUrl)
             .then(response => response.json())
             .then(data => {
+                console.log('Geocoding API response:', data);  // Debug log
                 if (data.status === 'OK' && data.results.length > 0) {
                     const address = data.results[0].formatted_address;
                     const locationName = data.results[0].address_components[0].long_name;
@@ -213,6 +214,8 @@
         const latitude = document.getElementById('latitude').value;
         const longitude = document.getElementById('longitude').value;
 
+        console.log('Map input form submitted with:', latitude, longitude);  // Debug log
+
         const googleMapsUrl = `https://www.google.com/maps/embed/v1/view?key=${api_key}&center=${latitude},${longitude}&zoom=${zoom}`;
         // Update the iframe src attribute
         document.getElementById('googleMapIframe').src = googleMapsUrl;
@@ -229,6 +232,7 @@
         const longitude = document.getElementById('longitude').value;
 
         if (latitude && longitude) {
+            console.log('Navigate button clicked with:', latitude, longitude);  // Debug log
             // Construct the Google Maps URL for navigation
             const googleMapsNavigationUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
             // Update the button's href attribute to the new URL
@@ -245,6 +249,7 @@
         }
     });
 
+    // Add change event listener to the GPS toggle switch
     document.getElementById('toggleGPS').addEventListener('change', function () {
         if (this.checked) {
             alert('GPS toggle switched on.'); // Alert when toggled on
@@ -284,6 +289,32 @@
         alert('GPS toggle switched off.'); // Alert when toggled on
         console.log('GPS toggle switched off.');
     }
+    });
+
+    // Add change event listener to the Lock toggle switch
+    document.getElementById('toggleLock').addEventListener('change', function () {
+        const lockState = this.checked; // Get the current state of the toggle (true if checked, false if not)
+        alert('Lock toggle switched ' + (lockState ? 'on' : 'off') + '.'); // Alert when toggled
+        console.log('Lock toggle switched ' + (lockState ? 'on' : 'off') + '.');
+
+        // Send a request to the ESP32 to change the lock state
+        fetch('{% url "set_locked" %}', {
+            method: 'POST',  // Use POST to change state
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ locked: lockState })  // Send the lock state as a JSON body
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'error') {
+                alert('Error: ' + data.message);
+            } else {
+                alert('Lock state updated successfully.');
+            }
+        })
+        .catch(error => console.error('Error updating lock state:', error));
     });
 
     {% comment %} document.addEventListener('DOMContentLoaded', function () {
