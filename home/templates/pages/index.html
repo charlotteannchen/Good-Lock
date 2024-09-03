@@ -14,7 +14,7 @@
                     <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); width: 400px;" placeholder="Enter device ID" pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed" required>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-warning d-flex justify-content-center align-items-center p-0" style="position: absolute; top: 350px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;">
+                    <button type="button" id="addDeviceButton" class="btn btn-warning d-flex justify-content-center align-items-center p-0" style="position: absolute; top: 350px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;">
                         <img src="{% static 'img/plus.png' %}" alt="Lock" style="width: 25px; height: 25px;">
                     </button>
                 </div>
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <!-- Success Modal -->
+      {% comment %} <!-- Success Modal -->
       <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -76,7 +76,32 @@
             </div>
           </div>
         </div>
+      </div> {% endcomment %}
+      <!-- Modals -->
+      {% for modal in ['success', 'fail', 'error'] %}
+      <div class="modal fade" id="{{ modal }}Modal" tabindex="-1" aria-labelledby="{{ modal }}ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="{{ modal }}ModalLabel">Notification</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {% if modal == 'success' %}
+              Successfully Added A New Lock!
+              {% elif modal == 'fail' %}
+              Incorrect Device ID.
+              {% else %}
+              An error occurred. Please try again.
+              {% endif %}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
       </div>
+      {% endfor %}
       {% include "includes/footer.html" %}
 
     </div>
@@ -93,34 +118,35 @@
 
 
     <script>
-        document.querySelector('.btn-warning').addEventListener('click', function() {
+        document.querySelector('addDeviceButton').addEventListener('click', function() {
           var deviceID = document.getElementById('deviceID').value;
         
-          // Send device ID to ESP32
-          fetch('http://172.20.10.14/receive_device_id', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({ 'id': deviceID })
-          })
-          .then(response => response.json())
-          .then(data => {
-            var notification = document.getElementById('notification');
-            console.log(data);
+          try {
+            const response = await fetch('http://172.20.10.14/receive_device_id', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({ 'id': deviceID })
+            });
+      
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+      
+            const data = await response.json();
             if (data.status === "success") {
-              var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                successModal.show();
+              const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+              successModal.show();
             } else {
-              var failModal = new bootstrap.Modal(document.getElementById('FailModal'));
+              const failModal = new bootstrap.Modal(document.getElementById('failModal'));
               failModal.show();
             }
-          })
-          .catch(error => {
+          } catch (error) {
             console.error('Error:', error);
-            var errorModal = new bootstrap.Modal(document.getElementById('ErrorModal'));
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
             errorModal.show();
-          });
+          }
         });
       
     </script>
