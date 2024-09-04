@@ -43,9 +43,9 @@
                         <div class="col-4 text-end"
                             style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
                             <div class="form-check form-switch" style="transform: scale(1.5);">
-                                <input class="form-check-input" type="checkbox" id="toggleConnect"
+                                <input class="form-check-input" type="checkbox" id="toggleLock"
                                     style="width: 40px; height: 20px;">
-                                <label class="form-check-label" for="toggleConnect"></label>
+                                <label class="form-check-label" for="toggleLock"></label>
                             </div>
                         </div>
                     </div>
@@ -270,9 +270,7 @@
     // Add change event listener to the GPS toggle switch
     document.getElementById('toggleGPS').addEventListener('change', function () {
         if (this.checked) {
-            alert('GPS toggle switched on.'); // Alert when toggled on
-            console.log('GPS toggle switched on.');
-            // Send a request to the ESP32 to get GPS data
+            alert('GPS toggle switched on.'); 
             fetch('{% url "get_gps_data" %}')
                 .then(response => response.json())
                 .then(data => {
@@ -307,14 +305,21 @@
     }
     });
 
+    let baseUrl;
+
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        baseUrl = '{% url "set_locked" %}';  // Local Django URL
+    } else {
+        baseUrl = '{% url "set_locked_ngrok" %}';  // Ngrok URL
+    }
+
     // Add change event listener to the Lock toggle switch
     document.getElementById('toggleLock').addEventListener('change', function () {
         const lockState = this.checked; // Get the current state of the toggle (true if checked, false if not)
-        alert('Lock toggle switched ' + (lockState ? 'on' : 'off') + '.'); // Alert when toggled
-        console.log('Lock toggle switched ' + (lockState ? 'on' : 'off') + '.');
-
-        // Send a request to the ESP32 to change the lock state
-        fetch('{% url "set_locked" %}', {
+        alert('Lock toggle switched ' + (lockState ? 'on' : 'off') + '.'); 
+        
+        // Send a request to the ESP32 to change the lock state, fetch('{% url "set_locked" %}', {
+        fetch(baseUrl, {
             method: 'POST',  // Use POST to change state
             headers: {
                 'Content-Type': 'application/json',

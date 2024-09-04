@@ -9,4 +9,5 @@ urlpatterns = [
     path('get_gps_data/', views.get_gps_data, name='get_gps_data'),
     path('receive_device_id', views.receive_device_id, name='receive_device_id'),
     path('set_locked/', views.set_locked, name='set_locked'),
+    path('set-locked-ngrok/', views.set_locked_ngrok, name='set_locked_ngrok'),
 ]
