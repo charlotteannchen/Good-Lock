@@ -95,7 +95,7 @@
 
     <script>
       const LOCAL_URL = 'http://172.20.10.14/receive_device_id';
-      const NGROK_URL = 'https://ddd4-2401-e180-88b2-7006-697c-dd84-2db2-b94e.ngrok-free.app/receive_device_id';
+      const NGROK_URL = 'https://42f7-2401-e180-88b2-7006-697c-dd84-2db2-b94e.ngrok-free.app/receive_device_id';
       const USE_NGROK = true; 
       const fetchUrl = USE_NGROK ? NGROK_URL : LOCAL_URL;
 
@@ -114,7 +114,6 @@
         })
         .then(response => response.json()) // Move '.then' after 'fetch'
         .then(data => {
-          alert('Success:'+ data); // Ensure the alert message is correct
           console.log(data);
           if (data.status === "success") {
             var successModal = new bootstrap.Modal(document.getElementById('successModal'));
