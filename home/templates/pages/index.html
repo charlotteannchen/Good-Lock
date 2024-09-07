@@ -8,13 +8,14 @@
         <div class="col-lg-12 mb-lg-0 mb-12" style="height: 100%;">
           <div class="card" style="height: 100%;"> 
             <div class="card-body p-3 d-flex flex-column align-items-center">
-              <h5 class="mb-1" style="position: absolute; top: 80px; text-align: center; width: 100%;">Add a new Device!</h5>
+              {% comment %} <h5 class="mb-1" style="position: absolute; top: 80px; text-align: center; width: 100%;">Add a new Device!</h5> {% endcomment %}
+              <img src="{% static 'img/GoodLock_long_rbg.png' %}" alt="GoodLock_long_rbg" class="image-center">
               <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%; width: 100%;">
                 <div class="mb-3  w-100">
-                    <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%);max-width: 400px; width: 90%;" placeholder="Enter device ID" pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed"  required>
+                    <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 42%; left: 50%; transform: translateX(-50%);max-width: 500px; width: 90%;" placeholder="Enter device ID" pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed"  required>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-warning d-flex justify-content-center align-items-center p-0" style="position: absolute; top: 350px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;">
+                    <button type="button" class="btn btn-warning d-flex justify-content-center align-items-center p-0" style="position: absolute; top: 50%; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;">
                         <img src="{% static 'img/plus.png' %}" alt="Lock" style="width: 25px; height: 25px;">
                     </button>
                 </div>

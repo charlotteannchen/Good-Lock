@@ -18304,7 +18304,7 @@ textarea.form-control-lg {
 }
 
 .input-group-text {
-  z-index: 9999;
+  z-index: 1000; /* 9999 */
   border-right: 0;
   padding-left: 10px;
   padding-right: 10px;
@@ -22744,4 +22744,13 @@ pre[class*=language-] {
   .form-check.form-switch {
       transform: scale(1.2); /* Scale down the switch slightly */
   }
+}
+
+.image-center {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%; /* 確保圖片不會超過容器寬度 */
+  max-height: 100vh; /* 確保圖片不會超過容器高度 */
 }
