@@ -10,8 +10,8 @@
             <div class="card-body p-3 d-flex flex-column align-items-center">
               <h5 class="mb-1" style="position: absolute; top: 80px; text-align: center; width: 100%;">Add a new Device!</h5>
               <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                <div class="mb-3">
-                    <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); width: 400px;" placeholder="Enter device ID" pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed" required>
+                <div class="mb-3  w-100">
+                    <input type="text" id="deviceID" class="form-control" style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%);max-width: 400px; width: 90%;" placeholder="Enter device ID" pattern="[A-Za-z0-9]+" title="Only letters and numbers are allowed"  required>
                 </div>
                 <div>
                     <button type="button" class="btn btn-warning d-flex justify-content-center align-items-center p-0" style="position: absolute; top: 350px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px;">
@@ -95,7 +95,7 @@
 
     <script>
       const LOCAL_URL = 'http://172.20.10.14/receive_device_id';
-      const NGROK_URL = 'https://42f7-2401-e180-88b2-7006-697c-dd84-2db2-b94e.ngrok-free.app/receive_device_id';
+      const NGROK_URL = 'https://8fe3-2a00-79e1-abd-4202-e40f-db08-30ab-c386.ngrok-free.app/receive_device_id';
       const USE_NGROK = true; 
       const fetchUrl = USE_NGROK ? NGROK_URL : LOCAL_URL;
 

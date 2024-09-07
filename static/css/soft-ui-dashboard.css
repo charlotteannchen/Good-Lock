@@ -2575,8 +2575,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input {
-  width: 1.23em;
-  height: 1.23em;
+  width: 40px;  /* 1.23em */
+  height: 20px;  /* 1.23em */
   margin-top: 0.135em;
   vertical-align: top;
   background-color: #fff;
@@ -3283,19 +3283,19 @@ textarea.form-control-lg {
 
 .btn-warning {
   --bs-btn-color: #000;
-  --bs-btn-bg: #fbcf33;
-  --bs-btn-border-color: #fbcf33;
+  --bs-btn-bg: #fbb405; /* #fbcf33 */
+  --bs-btn-border-color: #fbb405;
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #fcd652;
-  --bs-btn-hover-border-color: #fbd447;
+  --bs-btn-hover-bg: #fbb405;
+  --bs-btn-hover-border-color: #fbb405;
   --bs-btn-focus-shadow-rgb: 213, 176, 43;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #fcd95c;
-  --bs-btn-active-border-color: #fbd447;
+  --bs-btn-active-bg: #fbb405;
+  --bs-btn-active-border-color: #fbb405;
   --bs-btn-active-shadow: none;
   --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #fbcf33;
-  --bs-btn-disabled-border-color: #fbcf33;
+  --bs-btn-disabled-bg: #fbb405;
+  --bs-btn-disabled-border-color: #fbb405;
 }
 
 .btn-danger {
@@ -5858,6 +5858,7 @@ textarea.form-control-lg {
     overflow-y: auto;
   }
 }
+
 @media (max-width: 767.98px) {
   .modal-fullscreen-md-down {
     width: 100vw;
@@ -17491,8 +17492,8 @@ textarea.form-control-lg {
 
 .btn-warning:hover,
 .btn.bg-gradient-warning:hover {
-  background-color: #fbcf33;
-  border-color: #fbcf33;
+  background-color: #f4b400; /* #fbcf33 */
+  border-color: #f4b400;
 }
 .btn-warning .btn.bg-outline-warning,
 .btn.bg-gradient-warning .btn.bg-outline-warning {
@@ -22728,3 +22729,19 @@ pre[class*=language-] {
   }
 }
 /*# sourceMappingURL=soft-ui-dashboard.css.map */
+
+@media (max-width: 576px) {
+  .card-body .row .col-4.text-end {
+      left: 75%; /* Adjust this value to reposition the switch */
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+  }
+
+  .card-body .row .col-8 .numbers p {
+      font-size: 18px !important; /* Adjust the text size */
+  }
+
+  .form-check.form-switch {
+      transform: scale(1.2); /* Scale down the switch slightly */
+  }
+}

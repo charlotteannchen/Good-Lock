@@ -5,29 +5,28 @@
 
 <div class="container-fluid py-4">
 
-    <div class="row" style="height: 80px;">
+     {% comment %} <div class="row" style="height: 80px;">
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
-            <div class="card" style="height: 100%; position: relative;">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bolder"
-                                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
+            <div class="card"  style="height: 100%; position: relative;">
+            <div class="card-body p-3" style="height: 80px;">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
                                     Connect</p>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end"
-                            style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
-                            <div class="form-check form-switch" style="transform: scale(1.5);">
-                                <input class="form-check-input" type="checkbox" id="toggleConnect"
-                                    style="width: 40px; height: 20px;">
-                                <label class="form-check-label" for="toggleConnect"></label>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+                <div class="col-3 text-end" style="position: absolute; top: 35%;left: 80%; ">
+                  <div class="form-check form-switch" style="transform: scale(1.5);">
+                    <input class="form-check-input" type="checkbox" id="toggleConnect"
+                        style="width: 40px; height: 20px;">
+                    <label class="form-check-label" for="toggleConnect"></label>
+                </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
             <div class="card" style="height: 100%; position: relative;">
@@ -41,7 +40,7 @@
                             </div>
                         </div>
                         <div class="col-4 text-end"
-                            style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
+                            style="position: absolute; top: 50%; left: 80%; transform: translateY(-50%);">
                             <div class="form-check form-switch" style="transform: scale(1.5);">
                                 <input class="form-check-input" type="checkbox" id="toggleLock"
                                     style="width: 40px; height: 20px;">
@@ -52,29 +51,6 @@
                 </div>
             </div>
         </div>
-        {% comment %} <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
-            <div class="card" style="height: 100%; position: relative;">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bolder"
-                                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
-                                    GPS</p>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end"
-                            style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
-                            <div class="form-check form-switch" style="transform: scale(1.5);">
-                                <input class="form-check-input" type="checkbox" id="toggleConnect"
-                                    style="width: 40px; height: 20px;">
-                                <label class="form-check-label" for="toggleConnect"></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> {% endcomment %}
         <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
             <div class="card" style="height: 100%; position: relative;">
                 <div class="card-body p-3">
@@ -87,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-4 text-end"
-                            style="position: absolute; top: 50%; left: 85%; transform: translateY(-50%);">
+                            style="position: absolute; top: 50%; left: 80%; transform: translateY(-50%);">
                             <div class="form-check form-switch" style="transform: scale(1.5);">
                                 <input class="form-check-input" type="checkbox" id="toggleGPS" 
                                     style="width: 40px; height: 20px;">
@@ -98,9 +74,78 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  {% endcomment %}
 
-    <div class="row mt-4" style="height: 1000px;">
+    <div class="row">
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4" style="height: 100%;">
+          <div class="card"  style="height: 100%; position: relative;">
+            <div class="card-body p-3" style="height: 80px;">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
+                                    Connect</p>
+                  </div>
+                </div>
+                <div class="col-3 text-end" style="position: absolute; top: 35%;left: 80%; ">
+                  <div class="form-check form-switch" style="transform: scale(1.5);">
+                    <input class="form-check-input" type="checkbox" id="toggleConnect"
+                        style="width: 40px; height: 20px;">
+                    <label class="form-check-label" for="toggleConnect"></label>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+          <div class="card"  style="height: 100%; position: relative;">
+            <div class="card-body p-3" style="height: 80px;">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
+                                    Lock</p>
+                  </div>
+                </div>
+                <div class="col-3 text-end" style="position: absolute; top: 35%;left: 80%; ">
+                 <div class="form-check form-switch" style="transform: scale(1.5);">
+                    <input class="form-check-input" type="checkbox" id="toggleLock"
+                        style="width: 40px; height: 20px;">
+                    <label class="form-check-label" for="toggleLock"></label>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+          <div class="card"  style="height: 100%; position: relative;">
+            <div class="card-body p-3" style="height: 80px;">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); font-size: 25px !important;">
+                                    GPS</p>
+                  </div>
+                </div>
+                <div class="col-3 text-end" style="position: absolute; top: 35%;left: 80%; ">
+                  <div class="form-check form-switch" style="transform: scale(1.5);">
+                    <input class="form-check-input" type="checkbox" id="toggleGPS"
+                        style="width: 40px; height: 20px;">
+                    <label class="form-check-label" for="toggleGPS"></label>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <div class="row mt-4">
         <div class="col-lg-7 mb-lg-0 mb-4" style="height: 100%; width: 100%;">
             <div class="card" style="height: 100%; width: 100%;">
                 <div class="card-body p-3" style="height: 100%;">
@@ -150,7 +195,7 @@
                                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                             </a>
                         </div>
-                        <div class="col-lg-8 ms-auto text-center" style="height: 100%;">
+                        <div class="col-lg-8 ms-auto text-center">
                             <div class="h-100">
                                 <!-- Google Maps Embed Code -->
                                 <iframe id="googleMapIframe" class="w-100 h-100"
