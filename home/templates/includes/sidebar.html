@@ -258,8 +258,8 @@
     </ul> {% endcomment %}
 
   </div>
-  {% comment %} <div class="sidenav-footer mx-3 ">
-    <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
+  <div class="sidenav-footer mx-3 ">
+    {% comment %} <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
       <div class="full-background" style="background-image: url('{% static 'img/curved-images/white-curved.jpg' %}');background-color: #4285F4;"></div>
       <div class="card-body text-start p-3 w-100">
         <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
@@ -271,9 +271,17 @@
              target="_blank" class="btn btn-white btn-sm w-100 mb-0">Read the Manual</a>
         </div> 
       </div>
-    </div>
-     <a target="_blank"
+    </div>  {% endcomment %}
+   {% comment %} <a target="_blank"
        class="btn bg-gradient-primary mt-3 w-100" 
-       href="https://appseed.us/support/">About Us</a> 
-  </div> {% endcomment %}
+       href="https://appseed.us/support/">About Us</a>  {% endcomment %}
+       <button onclick="callPwaUrl()" class="btn bg-gradient-primary mt-3 w-100">Call PWA URL</button>
+  </div> 
 </aside>
+
+<script>
+  function callPwaUrl() {
+    // Redirect to the /pwa_download path
+    window.location.href = '/pwa_download';
+  }
+</script>

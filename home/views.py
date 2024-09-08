@@ -8,6 +8,7 @@ import urllib.parse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
+from django.urls import reverse
 
 ESP32_IP = 'http://172.20.10.14'
 def index(request):
