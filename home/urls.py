@@ -10,4 +10,5 @@ urlpatterns = [
     path('receive_device_id', views.receive_device_id, name='receive_device_id'),
     path('set_locked/', views.set_locked, name='set_locked'),
     path('set_search/', views.set_search, name='set_search'),
+    path('aboutus/', views.aboutus, name='aboutus'),
 ]

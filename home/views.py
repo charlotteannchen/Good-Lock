@@ -11,6 +11,7 @@ import json
 
 # ESP32_IP = 'http://172.20.10.14'
 ESP32_IP = 'http://10.0.175.67'
+ESP32_IP = 'http://192.168.1.1'
 def index(request):
     return render(request, 'pages/index.html')
 
@@ -119,3 +120,7 @@ def set_search(request):
             return JsonResponse({'status': 'error', 'message': str(e)})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+    
+    
+def aboutus(request):
+    return render(request, 'pages/about_us.html')
