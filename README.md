@@ -27,7 +27,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Screenshot 2025-02-14 at 12.31.33 AM](https://hackmd.io/_uploads/rJuORcsFJg.png)
+![Good-Lock-logo](Good-Lock-logo.png)
 
 Introducing GoodLock :lock: – the ultimate bike lock for College students on the go! 
 Tired of fumbling with keys or worrying about theft when you're racing across campus? GoodLock combines multi-mode authentication for rock-solid security, remote and contact unlock features for effortless access, and real-time GPS tracking so you can always pinpoint your ride in a sea of bicycles. Get ready to ride smarter, faster, and with total peace of mind! :bike: 
