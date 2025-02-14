@@ -1,11 +1,15 @@
+# GoodLock-GitHub-README
 # GoodLock!
 <a id="readme-top"></a>
 <!-- PROJECT LOGO -->
 <div align="center">
   <p align="center">
     <a href="https://youtu.be/tvExQ1x1_bo">View Demo</a>
+     &middot;
+      <a href="https://www.canva.com/design/DAGQJTxvr3E/pdzC5-xw8Dz4Kt-UZawzfQ/edit?utm_content=DAGQJTxvr3E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">View Slides</a>
   </p>
 </div>
+
 
 
 
@@ -31,6 +35,9 @@
 
 Introducing GoodLock :lock: – the ultimate bike lock for College students on the go! 
 Tired of fumbling with keys or worrying about theft when you're racing across campus? GoodLock combines multi-mode authentication for rock-solid security, remote and contact unlock features for effortless access, and real-time GPS tracking so you can always pinpoint your ride in a sea of bicycles. Get ready to ride smarter, faster, and with total peace of mind! :bike: 
+
+![Good-Lock-product](Good-Lock-product1.jpg)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,5 +91,3 @@ At this point, the app runs at `http://127.0.0.1:8000/`.
 
 <br />
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
